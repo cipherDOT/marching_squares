@@ -3,6 +3,7 @@ import random
 
 pygame.font.init()
 
+# display variables
 width = 600
 height = 600
 grey = (128, 128, 128)
@@ -11,13 +12,16 @@ display = pygame.display.set_mode((width, height))
 display.fill(grey)
 pygame.display.set_caption('Marching Squares')
 
+# 2D array that keeps track of the points
 field = []
 
 rez = 10
 
+# returns the value of the four points if treated as bits
 def state(a, b, c, d):
     return a * 8 + b * 4 + c * 2 + d * 1
 
+# the func. that draws the isolines
 def line(a, b):
     pygame.draw.line(display, (255, 255, 255), a, b, 1)
 
@@ -44,6 +48,7 @@ for i in range(rows):
         d = (x, y + rez * 0.5)
         case = state(field[i][j], field[i + 1][j], field[i + 1][j + 1], field[i][j + 1])
 
+        # checks every case to draw the respective isolines
         if case == 0:
             pass
         elif case == 1:
@@ -81,6 +86,7 @@ for i in range(rows):
 
 pygame.display.flip()
 
+# quit program
 while run:
     for event in pygame.event.get():
         if event.type ==  pygame.QUIT:
